@@ -133,7 +133,8 @@ class PublicView
             return '-';
         }
 
-        $fmt = new IntlDateFormatter('th_TH@calendar=buddhist', IntlDateFormatter::NONE, IntlDateFormatter::NONE, $tz, IntlDateFormatter::TRADITIONAL, 'd MMM y');
+        [$icuLocale, $pattern] = self::dateFormatFor(app()->getLocale());
+        $fmt = new IntlDateFormatter($icuLocale, IntlDateFormatter::NONE, IntlDateFormatter::NONE, $tz, IntlDateFormatter::TRADITIONAL, $pattern);
 
         return $fmt->format($d) ?: '-';
     }
@@ -149,9 +150,20 @@ class PublicView
             return '-';
         }
         $tz = new DateTimeZone('Asia/Bangkok');
-        $fmt = new IntlDateFormatter('th_TH@calendar=buddhist', IntlDateFormatter::NONE, IntlDateFormatter::NONE, $tz, IntlDateFormatter::TRADITIONAL, 'd MMM y HH:mm');
+        [$icuLocale, $pattern] = self::dateFormatFor(app()->getLocale());
+        $fmt = new IntlDateFormatter($icuLocale, IntlDateFormatter::NONE, IntlDateFormatter::NONE, $tz, IntlDateFormatter::TRADITIONAL, $pattern.' HH:mm');
 
         return $fmt->format($d) ?: '-';
+    }
+
+    /** @return array{0:string,1:string} [ชICU locale, date pattern] ตามภาษาที่เลือก */
+    private static function dateFormatFor(string $locale): array
+    {
+        return match ($locale) {
+            'en' => ['en_US', 'd MMM y'],
+            'zh' => ['zh_CN', 'y年M月d日'],
+            default => ['th_TH@calendar=buddhist', 'd MMM y'],
+        };
     }
 
     /** "เริ่มประมาณ 25 ก.ย. 2569 · ใช้เวลาประมาณการ 2 วัน" */
@@ -160,9 +172,9 @@ class PublicView
         if (!$step || empty($step['expectedDate'])) {
             return '';
         }
-        $text = 'เริ่มประมาณ '.self::thDate($step['expectedDate']);
+        $text = __('เริ่มประมาณ').' '.self::thDate($step['expectedDate']);
         if (!empty($step['estimatedDays'])) {
-            $text .= ' · ใช้เวลาประมาณการ '.$step['estimatedDays'].' วัน';
+            $text .= ' · '.__('ใช้เวลาประมาณการ').' '.$step['estimatedDays'].' '.__('วัน');
         }
 
         return $text;

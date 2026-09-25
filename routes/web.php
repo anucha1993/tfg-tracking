@@ -22,8 +22,8 @@ Route::get('/api/admin/link', [AdminController::class, 'link'])
 
 Route::fallback(function () {
     return response()->view('message', [
-        'title' => 'ไม่พบหน้านี้',
-        'message' => 'กรุณาสแกน QR Code จากเอกสารอีกครั้ง',
+        'title' => __('ไม่พบหน้านี้'),
+        'message' => __('กรุณาสแกน QR Code จากเอกสารอีกครั้ง'),
         'company' => config('tracking.company'),
     ], 404);
 });

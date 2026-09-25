@@ -56,7 +56,7 @@ class TrackingController extends Controller
         $dealId = TrackingToken::verifyToken($token, config('tracking.tracking_secret'));
 
         if (!$dealId) {
-            return $this->message('ไม่พบข้อมูล', 'ลิงก์ไม่ถูกต้องหรือถูกยกเลิกแล้ว กรุณาติดต่อเจ้าหน้าที่', 404)
+            return $this->message(__('ไม่พบข้อมูล'), __('ลิงก์ไม่ถูกต้องหรือถูกยกเลิกแล้ว กรุณาติดต่อเจ้าหน้าที่'), 404)
                 ->header('Cache-Control', 'private, no-store');
         }
 
@@ -64,12 +64,12 @@ class TrackingController extends Controller
             $result = $this->loadVisibleDeal($dealId);
 
             if (($result['error'] ?? null) === 'hidden') {
-                return $this->message('ไม่สามารถแสดงข้อมูลได้', 'งานนี้ปิดการติดตามแล้ว กรุณาติดต่อเจ้าหน้าที่', 410)
+                return $this->message(__('ไม่สามารถแสดงข้อมูลได้'), __('งานนี้ปิดการติดตามแล้ว กรุณาติดต่อเจ้าหน้าที่'), 410)
                     ->header('Cache-Control', 'private, no-store');
             }
 
             if ($result['error'] ?? null) {
-                return $this->message('ไม่พบข้อมูล', 'ไม่พบงานนี้ในระบบ กรุณาติดต่อเจ้าหน้าที่', 404)
+                return $this->message(__('ไม่พบข้อมูล'), __('ไม่พบงานนี้ในระบบ กรุณาติดต่อเจ้าหน้าที่'), 404)
                     ->header('Cache-Control', 'private, no-store');
             }
 
@@ -80,7 +80,7 @@ class TrackingController extends Controller
         } catch (\Throwable $e) {
             report($e);
 
-            return $this->message('ระบบขัดข้องชั่วคราว', 'กรุณาลองใหม่อีกครั้งในอีกสักครู่', 503)
+            return $this->message(__('ระบบขัดข้องชั่วคราว'), __('กรุณาลองใหม่อีกครั้งในอีกสักครู่'), 503)
                 ->header('Cache-Control', 'private, no-store');
         }
     }

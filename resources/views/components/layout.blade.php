@@ -17,7 +17,6 @@
 *{box-sizing:border-box}html,body{margin:0}
 body{background:var(--bg);color:var(--ink);font:15px/1.55 "IBM Plex Sans Thai","Sarabun",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 .wrap{max-width:640px;margin:0 auto;padding:16px 16px 40px}
-.brand{display:flex;align-items:center;gap:8px;color:var(--brand);font-weight:600;font-size:14px;margin:4px 2px 14px}
 .brand i{width:10px;height:10px;border-radius:3px;background:var(--brand);display:inline-block}
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
 .card+.card{margin-top:12px}
@@ -61,8 +60,20 @@ border:1px solid var(--line);color:var(--ink);background:var(--card);white-space
 .btn.line{background:#06c755;border-color:#06c755;color:#fff}
 .foot{color:var(--muted);font-size:12.5px;text-align:center;margin-top:16px}
 .empty{text-align:center;padding:36px 18px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:4px 2px 14px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:8px;color:var(--brand);font-weight:600;font-size:14px;margin:0}
+.langsw{display:flex;gap:4px}
+.langsw a{font-size:12.5px;font-weight:600;padding:4px 9px;border-radius:999px;text-decoration:none;color:var(--muted);border:1px solid var(--line)}
+.langsw a.on{color:#fff;background:var(--brand);border-color:var(--brand)}
 @media (max-width:420px){.grid{grid-template-columns:1fr 1fr}.grid div:last-child{grid-column:span 2}}
 </style></head><body><main class="wrap">
-<div class="brand"><i></i>{{ $company['name'] }} · ติดตามสถานะงาน</div>
+<div class="topbar">
+<div class="brand"><i></i>{{ $company['name'] }} · {{ __('ติดตามสถานะงาน') }}</div>
+<div class="langsw">
+@foreach(['th' => 'ไทย', 'en' => 'EN', 'zh' => '中文'] as $code => $label)
+<a href="{{ request()->fullUrlWithQuery(['lang' => $code]) }}" class="{{ app()->getLocale() === $code ? 'on' : '' }}">{{ $label }}</a>
+@endforeach
+</div>
+</div>
 {{ $slot }}
 </main></body></html>
