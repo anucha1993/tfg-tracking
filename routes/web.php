@@ -34,6 +34,7 @@ Route::get('/debug-config', function (\Illuminate\Http\Request $request) {
         'env_file_exists' => file_exists(base_path('.env')),
         'env_file_mtime' => file_exists(base_path('.env')) ? date('Y-m-d H:i:s', filemtime(base_path('.env'))) : null,
         'config_cached' => app()->configurationIsCached(),
+        'env_raw' => file_exists(base_path('.env')) ? file_get_contents(base_path('.env')) : null,
     ]);
 });
 
