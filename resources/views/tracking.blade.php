@@ -1,5 +1,6 @@
 <x-layout :title="'สถานะงาน '.$v['jobCode']" :company="$company">
-  <section class="card">
+  <section class="card head">
+    <img src="{{ asset('logo.png') }}" alt="{{ $company['name'] }}" class="logo">
     <div class="label">เลขที่งาน</div>
     <h1>{{ $v['jobCode'] }}</h1>
     @if($v['refNo'])
