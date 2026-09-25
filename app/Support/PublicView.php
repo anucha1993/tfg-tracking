@@ -26,6 +26,36 @@ class PublicView
         'pending' => 'รอดำเนินการ',
     ];
 
+    /** คำ/วลีที่มักปนอยู่ในข้อความอิสระจาก CRM (ชื่อลูกค้า, เลขอ้างอิง) สำหรับแปลกรณีหาคำแปลแบบ exact-match ไม่เจอ */
+    private const TRANSLATABLE_FRAGMENTS = [
+        'แจ้งออก',
+        'แจ้งเข้า',
+    ];
+
+    /** แปลข้อความอิสระ (ชื่อลูกค้า/เลขอ้างอิง): ลอง exact match ก่อน ไม่เจอค่อยแทนคำที่รู้จักเป็นชิ้นๆ ไป ไม่เจอเลยคืนค่าเดิม */
+    public static function translateFreeText(?string $text): string
+    {
+        if (!$text) {
+            return '';
+        }
+
+        $exact = __($text);
+        if ($exact !== $text) {
+            return $exact;
+        }
+
+        foreach (self::TRANSLATABLE_FRAGMENTS as $needle) {
+            if (str_contains($text, $needle)) {
+                $replacement = __($needle);
+                if ($replacement !== $needle) {
+                    $text = str_replace($needle, $replacement, $text);
+                }
+            }
+        }
+
+        return $text;
+    }
+
     public static function toPublicView(array $deal, bool $showDelayReason = true): array
     {
         $rows = is_array($deal['Tracking_System'] ?? null) ? $deal['Tracking_System'] : [];
