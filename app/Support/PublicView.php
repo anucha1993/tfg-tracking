@@ -154,7 +154,7 @@ class PublicView
         return $fmt->format($d) ?: '-';
     }
 
-    /** "เริ่มประมาณ 25 ก.ย. 2569 · ใช้เวลาราว 2 วัน" */
+    /** "เริ่มประมาณ 25 ก.ย. 2569 · ใช้เวลาประมาณการ 2 วัน" */
     public static function planText(?array $step): string
     {
         if (!$step || empty($step['expectedDate'])) {
@@ -162,7 +162,7 @@ class PublicView
         }
         $text = 'เริ่มประมาณ '.self::thDate($step['expectedDate']);
         if (!empty($step['estimatedDays'])) {
-            $text .= ' · ใช้เวลาราว '.$step['estimatedDays'].' วัน';
+            $text .= ' · ใช้เวลาประมาณการ '.$step['estimatedDays'].' วัน';
         }
 
         return $text;
