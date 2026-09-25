@@ -1,9 +1,16 @@
+@props(['robots' => 'noindex,nofollow', 'description' => null, 'author' => null])
 <!doctype html>
 <html lang="th">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex,nofollow"><meta name="referrer" content="no-referrer">
+<meta name="robots" content="{{ $robots }}"><meta name="referrer" content="no-referrer">
+@if($description)
+<meta name="description" content="{{ $description }}">
+@endif
+@if($author)
+<meta name="author" content="{{ $author }}">
+@endif
 <title>{{ $title }}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">

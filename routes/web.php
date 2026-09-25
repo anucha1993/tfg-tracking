@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/healthz', fn () => response()->json(['ok' => true]));
 
+// หน้าแรก (public, ให้ search engine เก็บข้อมูลได้ — ไม่มีข้อมูลลูกค้า)
+Route::get('/', fn () => response()->view('home', ['company' => config('tracking.company')]));
+
 // ---------- หน้าลูกค้า ----------
 Route::get('/t/{token}', [TrackingController::class, 'show'])
     ->where('token', '.*')
