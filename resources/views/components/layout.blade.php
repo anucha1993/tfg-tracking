@@ -22,7 +22,7 @@ body{background:var(--bg);color:var(--ink);font:15px/1.55 "IBM Plex Sans Thai","
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
 .card+.card{margin-top:12px}
 .card.head{position:relative}
-.logo{position:absolute;top:16px;right:16px;height:44px;width:auto}
+.logo{position:absolute;top:14px;right:16px;height:72px;width:auto}
 .label{color:var(--muted);font-size:13px}
 h1{font-size:22px;margin:2px 0 4px;letter-spacing:.2px}
 .cust{color:var(--muted);margin:0 0 10px}
