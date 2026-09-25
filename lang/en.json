@@ -36,5 +36,18 @@
     "ระบบขัดข้องชั่วคราว": "Temporary System Issue",
     "กรุณาลองใหม่อีกครั้งในอีกสักครู่": "Please try again in a moment.",
     "ไม่พบหน้านี้": "Page Not Found",
-    "กรุณาสแกน QR Code จากเอกสารอีกครั้ง": "Please scan the QR code from your document again."
+    "กรุณาสแกน QR Code จากเอกสารอีกครั้ง": "Please scan the QR code from your document again.",
+
+    "เปิดใบงาน": "Open Job",
+    "ยื่นเอกสารแจ้งออก(JE) Online": "Submit Exit Notification (JE) Online",
+    "ดาวโหลดเอกสารตอบรับ Online": "Download Acknowledgement Document Online",
+    "ส่งคืนเอกสารคืนนายจ้าง (JE)": "Return Documents to Employer (JE)",
+    "คีย์ข้อมูลลงระบบ Labour": "Enter Data into Labour System",
+    "แจ้งออกคนต่างด้าว - ทุกสัญชาติ": "Foreign Worker Exit Notification - All Nationalities",
+    "ยื่นดีมานด์นำเข้าแรงงาน MOU ผ่านระบบ E-Workpermit": "Submit MOU Labour Import Demand via E-Workpermit System",
+    "ดีมานด์อนุมัติ จากระบบ E-Workpermit": "Demand Approved from E-Workpermit System",
+    "กำหนดชำระค่าดำเนินการ": "Payment Due for Processing Fee",
+    "ยื่น Demand Letter พร้อมบัญชีรายชื่อ ที่กูตแรงงานพม่า ประจำประเทศไทย": "Submit Demand Letter with Name List at Myanmar Labour Attache Office in Thailand",
+    "นายจ้างเซ็นเอกสาร Commitment ที่กูตแรงงานพม่า ประจำประเทศไทย": "Employer Signs Commitment Document at Myanmar Labour Attache Office in Thailand",
+    "นำเข้า MOU ครบวาระ 4 ปี - ไม่รวมค่าจัดทำหนังสือเดินทาง": "MOU Import - Full 4-Year Term - Excluding Passport Fee"
 }
