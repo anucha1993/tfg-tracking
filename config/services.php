@@ -44,4 +44,8 @@ return [
         'api_version' => env('ZOHO_CRM_API_VERSION', 'v7'),
     ],
 
+    'google_translate' => [
+        'key' => env('GOOGLE_TRANSLATE_API_KEY'),
+    ],
+
 ];

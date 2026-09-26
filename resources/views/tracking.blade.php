@@ -10,7 +10,7 @@
     @if(count($v['services']))
       <div class="chips">
         @foreach($v['services'] as $svc)
-          <span class="chip">{{ __($svc) }}</span>
+          <span class="chip">{{ \App\Support\PublicView::translateFreeText($svc) }}</span>
         @endforeach
       </div>
     @endif
@@ -34,14 +34,14 @@
         <span class="dot" style="{{ $v['current']['status'] === 'delayed' ? 'border-color:var(--delay);color:var(--delay);background:var(--delay-bg)' : 'border-color:var(--active);color:var(--active);background:var(--active-bg)' }}">•</span>
         <div>
           <div class="label">{{ __('ขั้นตอนปัจจุบัน') }}</div>
-          <b>{{ __($v['current']['title']) }}</b>
+          <b>{{ \App\Support\PublicView::translateFreeText($v['current']['title']) }}</b>
           @if($planText)
             <div class="meta">{{ $planText }}</div>
           @endif
         </div>
       </div>
     @else
-      <div class="label">{{ __('สถานะ') }}: {{ $v['stage'] ? __($v['stage']) : '-' }}</div>
+      <div class="label">{{ __('สถานะ') }}: {{ $v['stage'] ? \App\Support\PublicView::translateFreeText($v['stage']) : '-' }}</div>
     @endif
   </section>
 
@@ -58,7 +58,7 @@
           <li class="{{ $s['status'] }}{{ $s['isCurrent'] ? ' cur' : '' }}">
             <span class="dot">{{ $s['status'] === 'done' ? '✓' : ($s['status'] === 'delayed' ? '!' : $i + 1) }}</span>
             <div class="body">
-              <div class="t">{{ __($s['title']) }}
+              <div class="t">{{ \App\Support\PublicView::translateFreeText($s['title']) }}
                 @if($s['status'] !== 'pending')
                   <span class="badge b-{{ $s['status'] }}">{{ __(\App\Support\PublicView::STATUS_LABEL[$s['status']]) }}</span>
                 @endif
@@ -67,7 +67,7 @@
                 <div class="meta">{{ $dateLine }}</div>
               @endif
               @if($s['delayReason'])
-                <div class="reason">{{ __('หมายเหตุ') }}: {{ __($s['delayReason']) }}</div>
+                <div class="reason">{{ __('หมายเหตุ') }}: {{ \App\Support\PublicView::translateFreeText($s['delayReason']) }}</div>
               @endif
             </div>
           </li>

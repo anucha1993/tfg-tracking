@@ -44,12 +44,29 @@ class PublicView
             return $exact;
         }
 
+        $locale = app()->getLocale();
+        if ($locale === 'th') {
+            return $text;
+        }
+
+        $replaced = $text;
         foreach (self::TRANSLATABLE_FRAGMENTS as $needle) {
-            if (str_contains($text, $needle)) {
+            if (str_contains($replaced, $needle)) {
                 $replacement = __($needle);
                 if ($replacement !== $needle) {
-                    $text = str_replace($needle, $replacement, $text);
+                    $replaced = str_replace($needle, $replacement, $replaced);
                 }
+            }
+        }
+        if ($replaced !== $text) {
+            return $replaced;
+        }
+
+        // ยังมีอักษรไทยเหลืออยู่ -> ลองแปลด้วย Google Translate (มีแคชถาวรในตัว)
+        if (preg_match('/\p{Thai}/u', $text)) {
+            $machine = app(\App\Services\GoogleTranslateService::class)->translate($text, $locale);
+            if ($machine) {
+                return $machine;
             }
         }
 
