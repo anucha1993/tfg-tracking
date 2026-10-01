@@ -1,6 +1,6 @@
 <x-layout :title="__('สถานะงาน').' '.$v['jobCode']" :company="$company">
   <section class="card head">
-    <img src="{{ asset('logo.png') }}" alt="{{ $company['name'] }}" class="logo">
+    <img src="{{ asset(app()->getLocale() === 'zh' ? 'logo-cn.jpg' : 'logo.png') }}" alt="{{ $company['name'] }}" class="logo">
     <div class="label">{{ __('เลขที่งาน') }}</div>
     <h1>{{ $v['jobCode'] }}</h1>
     @if($v['refNo'])
