@@ -6,7 +6,7 @@
     @if($v['refNo'])
       <div class="label">{{ __('เลขอ้างอิงใบงาน') }} {{ \App\Support\PublicView::translateFreeText($v['refNo']) }}</div>
     @endif
-    <p class="cust">{{ \App\Support\PublicView::translateFreeText($v['customer']) }}</p>
+    <p class="cust">{{ \App\Support\PublicView::translateCompanyName($v['customer']) }}</p>
     @if(count($v['services']))
       <div class="chips">
         @foreach($v['services'] as $svc)

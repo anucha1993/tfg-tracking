@@ -33,26 +33,26 @@ class PublicView
     ];
 
     /** แปลข้อความอิสระ (ชื่อลูกค้า/เลขอ้างอิง): ลอง exact match ก่อน ไม่เจอค่อยแทนคำที่รู้จักเป็นชิ้นๆ ไป ไม่เจอเลยคืนค่าเดิม */
-    public static function translateFreeText(?string $text): string
+    public static function translateFreeText(?string $text, ?string $targetLocale = null): string
     {
         if (!$text) {
             return '';
         }
 
-        $exact = __($text);
-        if ($exact !== $text) {
-            return $exact;
-        }
-
-        $locale = app()->getLocale();
+        $locale = $targetLocale ?? app()->getLocale();
         if ($locale === 'th') {
             return $text;
+        }
+
+        $exact = __($text, [], $locale);
+        if ($exact !== $text) {
+            return $exact;
         }
 
         $replaced = $text;
         foreach (self::TRANSLATABLE_FRAGMENTS as $needle) {
             if (str_contains($replaced, $needle)) {
-                $replacement = __($needle);
+                $replacement = __($needle, [], $locale);
                 if ($replacement !== $needle) {
                     $replaced = str_replace($needle, $replacement, $replaced);
                 }
@@ -71,6 +71,15 @@ class PublicView
         }
 
         return $text;
+    }
+
+    /** ชื่อบริษัท/ลูกค้า: ไทยคงเดิม, อังกฤษแปลปกติ, จีนใช้ภาษาอังกฤษแทน (ไม่แปลเป็นจีน) */
+    public static function translateCompanyName(?string $text): string
+    {
+        $locale = app()->getLocale();
+        $target = $locale === 'zh' ? 'en' : $locale;
+
+        return self::translateFreeText($text, $target);
     }
 
     public static function toPublicView(array $deal, bool $showDelayReason = true): array
